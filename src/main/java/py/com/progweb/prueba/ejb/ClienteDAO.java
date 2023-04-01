@@ -17,7 +17,7 @@ public class ClienteDAO {
     }
 
     public List<Cliente> listar(){
-        return this.em.createQuery("select * from Cliente c").getResultList();
+        return this.em.createQuery("select c from Cliente c").getResultList();
     }
     public List<Cliente> seleccionar(String nombre){
         return this.em.createQuery("select c from Cliente c where nombre like :param")

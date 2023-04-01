@@ -18,10 +18,15 @@ public class ClienteRest {
     public Response getClientePorNombre(@QueryParam("nombre") String nombre){
         return Response.ok(clienteDAO.seleccionar(nombre)).build();
     }
+    @GET
+    public Response listarClientes(){
+        return Response.ok(clienteDAO.listar()).build();
+    }
     @POST
     public Response agregar(Cliente cliente){
         clienteDAO.agregar(cliente);
         return Response.ok(cliente).build();
     }
+
 
 }
