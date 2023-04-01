@@ -74,3 +74,5 @@ CREATE TABLE detalle (
     CONSTRAINT fk_bolsa_puntos_detalle FOREIGN KEY (id_bolsa_puntos_utilizada) REFERENCES bolsa_puntos (id_bolsa)
 );
 CREATE SEQUENCE public.detalle_sec;
+
+alter table cliente alter column fecha_nacimiento set data type varchar(50);
