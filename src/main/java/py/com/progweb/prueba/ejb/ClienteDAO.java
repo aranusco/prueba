@@ -30,6 +30,17 @@ public class ClienteDAO {
     public Cliente getById(Long id){
         return this.em.find(Cliente.class, id);
     }
+    public void actualizar(Cliente cliente) {
+        Cliente clienteToUpdate = getById(cliente.getId());
+        clienteToUpdate.setNombre(cliente.getNombre());
+        clienteToUpdate.setApellido(cliente.getApellido());
+        clienteToUpdate.setDocumento(cliente.getDocumento());
+        clienteToUpdate.setTipoDocumento(cliente.getTipoDocumento());
+        clienteToUpdate.setNacionalidad(cliente.getNacionalidad());
+        clienteToUpdate.setTelefono(cliente.getTelefono());
+        clienteToUpdate.setFechaNacimiento(cliente.getFechaNacimiento());
+
+    }
 
     public List eliminar(Long id){
         return Collections.singletonList(this.em.createQuery("delete from Cliente c where id_cliente like :param")

@@ -1,7 +1,9 @@
 package py.com.progweb.prueba.rest;
 
+import org.jboss.remoting.Client;
 import py.com.progweb.prueba.ejb.ClienteDAO;
 import py.com.progweb.prueba.model.Cliente;
+import py.com.progweb.prueba.model.Punto;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -27,6 +29,13 @@ public class ClienteRest {
     public Response agregar(Cliente cliente){
         clienteDAO.agregar(cliente);
         return Response.ok(cliente).build();
+    }
+    @PUT
+    @Path(("/actualizar/{id}"))
+    public Response actualizar(Cliente cliente){
+        cliente.setId(cliente.getId());
+        clienteDAO.actualizar(cliente);
+        return Response.ok().build();
     }
 
     @DELETE
