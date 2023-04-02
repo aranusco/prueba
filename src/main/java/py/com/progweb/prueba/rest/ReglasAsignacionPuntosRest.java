@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
-@Path("/ReglasAsignacionPuntos")
+@Path("/reglas")
 @Consumes("application/json")
 @Produces("application/json")
 
@@ -19,27 +19,34 @@ public class ReglasAsignacionPuntosRest {
     ReglasAsignacionPuntosDAO reglasDAO;
 
     @GET
-    public Response getReglaPorId(@QueryParam("id_reglas") Integer id_reglas){
-        return Response.ok(reglasDAO.seleccionar(id_reglas)).build();
+    @Path("/{id}")
+    public Response obtenerPorId(@PathParam("id") Long id){
+        return Response.ok(reglasDAO.getById(id)).build();
     }
 
     @GET
-    @Path("/reglasAsignacionPuntos")
+    @Path("/listar")
     public Response listarReglasAsignacionPuntos(){
         return Response.ok(reglasDAO.listar()).build();
     }
 
     @POST
-    @Path("/")
     public Response agregar(ReglasAsignacionPuntos regla){
         reglasDAO.agregar(regla);
         return Response.ok(regla).build();
     }
 
     @PUT
-    @Path(("/actualizar/{id}"))
+    @Path(("/actualizar"))
     public Response actualizar(ReglasAsignacionPuntos reglas){
         reglasDAO.actualizar(reglas);
         return Response.ok().build();
+    }
+
+    @DELETE
+    @Path("/eliminar/{id}")
+    public Response eliminar(@PathParam("id") Long id){
+        reglasDAO.eliminar(id);
+        return Response.ok(id).build();
     }
 }
