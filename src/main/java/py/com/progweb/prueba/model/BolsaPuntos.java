@@ -6,27 +6,27 @@ import javax.persistence.*;
 @Table(name = "bolsa_puntos")
 public class BolsaPuntos {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bolsaPuntosSec")
+    @GeneratedValue(generator = "bolsaPuntosSec")
     @SequenceGenerator(name = "bolsaPuntosSec", sequenceName = "bolsa_sec", allocationSize = 0)
     @Column(name = "id_bolsa")
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    /* Revisar esta parte
+
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "vencimiento_puntos_id")
+    @JoinColumn(name = "id_vencimiento_puntos")
     private VencimientoPuntos vencimientoPuntos;
-     */
+    @Basic(optional = false)
     @Column(name = "puntaje_asignado")
     private int puntajeAsignado;
-
+    @Basic(optional = false)
     @Column(name = "puntaje_utilizado")
     private int puntajeUtilizado;
-
+    @Basic(optional = false)
     @Column(name = "saldo_puntos")
     private int saldoPuntos;
-
+    @Basic(optional = false)
     @Column(name = "monto_operacion")
     private int montoOperacion;
 
@@ -49,13 +49,13 @@ public class BolsaPuntos {
         this.cliente = cliente;
     }
 
-    /*public VencimientoPuntos getVencimientoPuntos() {
+    public VencimientoPuntos getVencimientoPuntos() {
         return vencimientoPuntos;
     }
 
     public void setVencimientoPuntos(VencimientoPuntos vencimientoPuntos) {
         this.vencimientoPuntos = vencimientoPuntos;
-    }*/
+    }
 
     public int getPuntajeAsignado() {
         return puntajeAsignado;

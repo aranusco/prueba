@@ -76,3 +76,10 @@ CREATE TABLE detalle (
 CREATE SEQUENCE public.detalle_sec;
 
 alter table cliente alter column fecha_nacimiento set data type varchar(50);
+
+alter table bolsa_puntos drop column fecha_asignacion_puntaje;
+alter table bolsa_puntos drop column fecha_caducidad_puntaje;
+
+alter table bolsa_puntos add column id_vencimiento_puntos integer not null;
+
+alter table bolsa_puntos add constraint id_vencimiento_fk foreign key (id_vencimiento_puntos) references vencimiento_puntos(id_vencimiento);

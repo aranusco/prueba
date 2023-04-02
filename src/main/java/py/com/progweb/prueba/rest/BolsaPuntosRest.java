@@ -25,4 +25,9 @@ public class BolsaPuntosRest {
     public Response listarBolsaPuntos(){
         return Response.ok(bolsaPuntosDAO.listar()).build();
     }
+    @POST
+    public Response agregar(BolsaPuntos request){
+        bolsaPuntosDAO.agregar(request);
+        return Response.ok(request).build();
+    }
 }
