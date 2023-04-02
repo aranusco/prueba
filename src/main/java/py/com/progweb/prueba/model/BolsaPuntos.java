@@ -13,7 +13,6 @@ public class BolsaPuntos {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_vencimiento_puntos")
     private VencimientoPuntos vencimientoPuntos;

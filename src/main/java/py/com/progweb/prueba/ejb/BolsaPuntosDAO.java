@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -38,5 +39,12 @@ public class BolsaPuntosDAO {
         if (c != null){
             this.em.remove(c);
         }
+    }
+    public List<BolsaPuntos> listarPorCliente(Long id){
+        Query query= this.em.createQuery("SELECT c " +
+                        "FROM BolsaPuntos c " +
+                        "WHERE cliente.id = :id", BolsaPuntos.class)
+                .setParameter("id", id);
+        return (List<BolsaPuntos>) query.getResultList();
     }
 }
