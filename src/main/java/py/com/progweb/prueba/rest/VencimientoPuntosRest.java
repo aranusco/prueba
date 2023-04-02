@@ -18,9 +18,21 @@ public class VencimientoPuntosRest {
     public Response listar(){
         return Response.ok(vencimientoPuntosDAO.listar()).build();
     }
+    @GET
+    @Path("/{id}")
+    public Response obtenerPorId(@PathParam("id") Long id){
+        return Response.ok(vencimientoPuntosDAO.getById(id)).build();
+    }
     @POST
     public Response agregar(VencimientoPuntos request){
         vencimientoPuntosDAO.agregar(request);
         return Response.ok(request).build();
     }
+    @PUT
+    @Path("/actualizar")
+    public Response actualizar(VencimientoPuntos request){
+        vencimientoPuntosDAO.actualizar(request);
+        return Response.ok().build();
+    }
+
 }

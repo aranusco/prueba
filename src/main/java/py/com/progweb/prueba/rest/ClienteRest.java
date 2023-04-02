@@ -25,6 +25,11 @@ public class ClienteRest {
     public Response listarClientes(){
         return Response.ok(clienteDAO.listar()).build();
     }
+    @GET
+    @Path("/{id}")
+    public Response obtenerPorId(@PathParam("id") Long id){
+        return Response.ok(clienteDAO.getById(id)).build();
+    }
     @POST
     public Response agregar(Cliente cliente){
         clienteDAO.agregar(cliente);

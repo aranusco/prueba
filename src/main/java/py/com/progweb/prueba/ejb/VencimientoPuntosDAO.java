@@ -24,6 +24,11 @@ public class VencimientoPuntosDAO {
     public VencimientoPuntos getById(Long id){
         return this.em.find(VencimientoPuntos.class, id);
     }
+    public void actualizar(VencimientoPuntos request){
+        VencimientoPuntos vencimientoToUpdate = getById(request.getId());
+        vencimientoToUpdate.setFechaInicio(request.getFechaInicio());
+        vencimientoToUpdate.setFechaFin(request.getFechaFin());
+    }
 
 
 }
