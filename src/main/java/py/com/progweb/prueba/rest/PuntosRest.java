@@ -29,6 +29,11 @@ public class PuntosRest {
         PuntosDAO.agregar(punto);
         return Response.ok(punto).build();
     }
+    @GET
+    @Path("/descripcion/{descripcion}")
+    public Response getByDescripcion(@PathParam("descripcion") String descripcion) {
+        return Response.ok(PuntosDAO.ListarDescripcion(descripcion)).build();
+    }
     @PUT
     @Path(("/{id}"))
     public Response actualizar(@PathParam("id") Integer id, Punto punto){
@@ -36,6 +41,11 @@ public class PuntosRest {
         PuntosDAO.actualizar(punto);
         return Response.ok().build();
     }
-
+    @DELETE
+    @Path("/eliminar/{id}")
+    public Response eliminar(@PathParam("id") Integer id){
+        PuntosDAO.eliminar(id);
+        return Response.ok(id).build();
+    }
 
 }
