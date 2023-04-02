@@ -25,11 +25,11 @@ public class BolsaPuntosRest {
     public Response listarBolsaPuntos(){
         return Response.ok(bolsaPuntosDAO.listar()).build();
     }
-    @POST
+    /*@POST
     public Response agregar(BolsaPuntos request){
         bolsaPuntosDAO.agregar(request);
         return Response.ok(request).build();
-    }
+    }*/
     @GET
     @Path("listar/cliente/{id}")
     public Response listarPorCliente(@PathParam("id") Long id){
