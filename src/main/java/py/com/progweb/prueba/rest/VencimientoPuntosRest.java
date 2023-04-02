@@ -34,5 +34,11 @@ public class VencimientoPuntosRest {
         vencimientoPuntosDAO.actualizar(request);
         return Response.ok().build();
     }
+    @DELETE
+    @Path("/{id}")
+    public Response eliminar(@PathParam("id") Long id){
+        vencimientoPuntosDAO.eliminar(id);
+        return Response.ok().build();
+    }
 
 }

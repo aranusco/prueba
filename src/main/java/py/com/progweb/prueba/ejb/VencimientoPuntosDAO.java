@@ -1,5 +1,6 @@
 package py.com.progweb.prueba.ejb;
 
+import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.model.VencimientoPuntos;
 
 import javax.ejb.Stateless;
@@ -30,5 +31,10 @@ public class VencimientoPuntosDAO {
         vencimientoToUpdate.setFechaFin(request.getFechaFin());
     }
 
-
+    public void eliminar(Long id){
+        VencimientoPuntos v = this.em.find(VencimientoPuntos.class, id);
+        if (v != null){
+            this.em.remove(v);
+        }
+    }
 }

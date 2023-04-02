@@ -42,8 +42,10 @@ public class ClienteDAO {
 
     }
 
-    public List eliminar(Long id){
-        return Collections.singletonList(this.em.createQuery("delete from Cliente c where id_cliente like :param")
-                .setParameter("param", "%" + id + "%").executeUpdate());
+    public void eliminar(Long id){
+        Cliente c = this.em.find(Cliente.class, id);
+        if (c != null){
+            this.em.remove(c);
+        }
     }
 }
