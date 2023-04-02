@@ -2,6 +2,8 @@ package py.com.progweb.prueba.model;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "bolsa_puntos")
 public class BolsaPuntos {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bolsaPuntosSec")
