@@ -5,6 +5,8 @@ import py.com.progweb.prueba.model.Cliente;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.Collections;
 import java.util.List;
 
 @Stateless
@@ -17,14 +19,20 @@ public class ClienteDAO {
     }
 
     public List<Cliente> listar(){
-        return this.em.createQuery("select c from Cliente c").getResultList();
+        Query q = this.em.createQuery("select c from Cliente c");
+        return (List<Cliente>) q.getResultList();
     }
-    public List<Cliente> seleccionar(String nombre){
+    public List seleccionar(String nombre){
         return this.em.createQuery("select c from Cliente c where nombre like :param")
                 .setParameter("param", "%"+nombre+"%").getResultList();
     }
 
     public Cliente getById(Long id){
         return this.em.find(Cliente.class, id);
+    }
+
+    public List eliminar(Long id){
+        return Collections.singletonList(this.em.createQuery("delete from Cliente c where id_cliente like :param")
+                .setParameter("param", "%" + id + "%").executeUpdate());
     }
 }

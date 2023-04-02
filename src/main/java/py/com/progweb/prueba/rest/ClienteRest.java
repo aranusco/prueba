@@ -19,6 +19,7 @@ public class ClienteRest {
         return Response.ok(clienteDAO.seleccionar(nombre)).build();
     }
     @GET
+    @Path("/listar")
     public Response listarClientes(){
         return Response.ok(clienteDAO.listar()).build();
     }
@@ -28,5 +29,11 @@ public class ClienteRest {
         return Response.ok(cliente).build();
     }
 
+    @DELETE
+    @Path("/eliminar/{id}")
+    public Response eliminar(@PathParam("id") Long id){
+        clienteDAO.eliminar(id);
+        return Response.ok(id).build();
+    }
 
 }
