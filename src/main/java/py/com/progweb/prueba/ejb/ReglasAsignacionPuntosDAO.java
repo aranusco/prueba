@@ -1,5 +1,6 @@
 package py.com.progweb.prueba.ejb;
 
+import py.com.progweb.prueba.dto.CargaPuntosDTO;
 import py.com.progweb.prueba.model.ReglasAsignacionPuntos;
 
 import javax.ejb.Stateless;
@@ -39,5 +40,11 @@ public class ReglasAsignacionPuntosDAO {
         if (c != null) {
             this.em.remove(c);
         }
+    }
+    public int consultaPuntos(CargaPuntosDTO request){
+        ReglasAsignacionPuntos regla = this.em.createQuery("from ReglasAsignacionPuntos r " +
+                "where r.limiteInferior <= :monto and r.limiteSuperior >= :monto", ReglasAsignacionPuntos.class)
+                .setParameter("monto", request.getMonto()).getSingleResult();
+        return Math.floorDiv(request.getMonto(), regla.getEquivalencia());
     }
 }

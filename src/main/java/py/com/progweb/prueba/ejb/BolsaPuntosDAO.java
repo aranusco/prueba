@@ -42,8 +42,9 @@ public class BolsaPuntosDAO {
         BolsaPuntos bolsaPuntos = new BolsaPuntos();
         bolsaPuntos.setCliente(cliente);
         bolsaPuntos.setVencimientoPuntos(vencimientoPuntos);
-        bolsaPuntos.setPuntajeAsignado(cantPuntos);
+        bolsaPuntos.setSaldoPuntos(cantPuntos);
         bolsaPuntos.setMontoOperacion(request.getMonto());
+        bolsaPuntos.setPuntajeUtilizado(0);
 
         this.em.persist(vencimientoPuntos);
         this.em.persist(bolsaPuntos);
