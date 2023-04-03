@@ -60,11 +60,11 @@ public class ConsultasRest {
         }
     }
 
-   /* @GET
-    @Path("uso-puntos/descripcion")
-    public Response puntosPorFechaUso(@QueryParam("param") String descripcionConcepto) {
+    @GET
+    @Path("uso-puntos/concepto")
+    public Response puntosPorConcepto(@QueryParam("param") String descripcionConcepto) {
         try {
-            List<Detalle> listaUsos = consultasDao.puntosPorFechaUsot(descripcionConcepto);
+            List<Detalle> listaUsos = consultasDao.puntosPorDecripcion(descripcionConcepto);
             if (listaUsos == null) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
@@ -72,7 +72,23 @@ public class ConsultasRest {
         } catch (Exception e)  {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An error ocurred while listing point uses: " + e.getMessage()).build();
         }
-    }*/
+    }
+
+    @GET
+    @Path("uso-puntos/cliente/{id}")
+    public Response puntosPorIdCliente(@PathParam("id") Long id) {
+        try {
+            List<Detalle> listaUsos = consultasDao.puntosPorIdCliente(id);
+            if (listaUsos == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            return Response.ok(listaUsos).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An error ocurred while listing point uses: " + e.getMessage()).build();
+        }
+    }
+
+
 
 
 }

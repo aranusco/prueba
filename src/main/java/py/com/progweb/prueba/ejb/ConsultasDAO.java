@@ -28,6 +28,18 @@ public class ConsultasDAO {
                 "where to_char(u.cabecera.fecha, 'yyyy-mm-dd') = :fecha", Detalle.class).setParameter("fecha", fecha).getResultList();
     }
 
+    public List<Detalle> puntosPorDecripcion(String descripcionConcepto) {
+        return em.createQuery("from Detalle u " +
+                "where u.cabecera.conceptoUsoPunto = :descripcionConcepto", Detalle.class).setParameter("descripcionConcepto", descripcionConcepto).getResultList();
+    }
+
+    public List<Detalle> puntosPorIdCliente(Long id) {
+        return em.createQuery("from Detalle u " +
+                "where u.cabecera.cliente.id = :id", Detalle.class).setParameter("id", id).getResultList();
+    }
+
+
+
 
     public List<BolsaPuntos> listarPorRango(Integer rangoInferior, Integer rangoSuperior) {
         return this.em.createQuery("select bp from BolsaPuntos bp " +
