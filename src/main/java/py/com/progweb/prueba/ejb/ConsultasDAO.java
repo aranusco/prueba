@@ -1,13 +1,17 @@
 package py.com.progweb.prueba.ejb;
 
 import py.com.progweb.prueba.model.BolsaPuntos;
+import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.model.Detalle;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.List;
 
 @Stateless
@@ -48,5 +52,23 @@ public class ConsultasDAO {
                 .getResultList();
     }
 
+    public List seleccionarByFechaExpiracion(Integer dia){
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(timestamp);
+        cal.add(Calendar.DATE, dia);
+        Timestamp expiredTimestamp = new Timestamp(cal.getTimeInMillis());
+
+        TypedQuery<BolsaPuntos> query = em.createQuery("SELECT b FROM Cliente c, BolsaPuntos b, VencimientoPuntos v " +
+                "WHERE (b.cliente.id = c.id) " +
+                "AND (b.vencimientoPuntos.id = v.id) " +
+                "AND (v.fechaFin <= :expiredDate) " +
+                "AND (b.saldoPuntos >= 0)", BolsaPuntos.class);
+        query.setParameter("expiredDate", expiredTimestamp);
+
+        List<BolsaPuntos> clientes = query.getResultList();
+
+        return clientes;
+    }
 
 }

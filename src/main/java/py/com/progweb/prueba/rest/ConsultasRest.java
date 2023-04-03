@@ -106,6 +106,12 @@ public class ConsultasRest {
         return Response.ok(clienteDAO.seleccionarByFecha(fecha)).build();
     }
 
+    @GET
+    @Path("/expiracion/{dia}")
+    public Response getClienteByFechaExpiracion(@PathParam("dia") Integer dia){
+        return Response.ok(consultasDao.seleccionarByFechaExpiracion(dia)).build();
+    }
+
 
 
 }
