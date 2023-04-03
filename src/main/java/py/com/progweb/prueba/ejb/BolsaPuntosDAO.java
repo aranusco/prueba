@@ -41,6 +41,7 @@ public class BolsaPuntosDAO {
 
         BolsaPuntos bolsaPuntos = new BolsaPuntos();
         bolsaPuntos.setCliente(cliente);
+        bolsaPuntos.setPuntajeAsignado(cantPuntos);
         bolsaPuntos.setVencimientoPuntos(vencimientoPuntos);
         bolsaPuntos.setSaldoPuntos(cantPuntos);
         bolsaPuntos.setMontoOperacion(request.getMonto());
