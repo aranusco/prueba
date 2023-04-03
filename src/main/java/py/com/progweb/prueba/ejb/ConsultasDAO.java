@@ -47,4 +47,6 @@ public class ConsultasDAO {
                 .setParameter("min", rangoInferior).setParameter("max", rangoSuperior)
                 .getResultList();
     }
+
+
 }

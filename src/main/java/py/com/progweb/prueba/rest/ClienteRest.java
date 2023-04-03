@@ -17,8 +17,19 @@ public class ClienteRest {
     ClienteDAO clienteDAO;
 
     @GET
-    public Response getClientePorNombre(@QueryParam("nombre") String nombre){
+    @Path("/nombre/{nombre}")
+    public Response getClientePorNombre(@PathParam("nombre") String nombre){
         return Response.ok(clienteDAO.seleccionar(nombre)).build();
+    }
+    @GET
+    @Path("/apellido/{apellido}")
+    public Response getClientePorApellido(@PathParam("apellido") String apellido){
+        return Response.ok(clienteDAO.seleccionar(apellido)).build();
+    }
+    @GET
+    @Path("/cumple/{fecha}")
+    public Response getClienteByFecha(@PathParam("fecha") String fecha){
+        return Response.ok(clienteDAO.seleccionarByFecha(fecha)).build();
     }
     @GET
     @Path("/listar")

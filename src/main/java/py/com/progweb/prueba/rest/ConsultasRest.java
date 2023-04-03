@@ -1,5 +1,6 @@
 package py.com.progweb.prueba.rest;
 
+import py.com.progweb.prueba.ejb.ClienteDAO;
 import py.com.progweb.prueba.ejb.ConsultasDAO;
 import py.com.progweb.prueba.model.BolsaPuntos;
 import py.com.progweb.prueba.model.Detalle;
@@ -87,7 +88,23 @@ public class ConsultasRest {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An error ocurred while listing point uses: " + e.getMessage()).build();
         }
     }
-
+    @Inject
+    ClienteDAO clienteDAO;
+    @GET
+    @Path("/nombre/{nombre}")
+    public Response getClientePorNombre(@PathParam("nombre") String nombre){
+        return Response.ok(clienteDAO.seleccionar(nombre)).build();
+    }
+    @GET
+    @Path("/apellido/{apellido}")
+    public Response getClientePorApellido(@PathParam("apellido") String apellido){
+        return Response.ok(clienteDAO.seleccionar(apellido)).build();
+    }
+    @GET
+    @Path("/cumple/{fecha}")
+    public Response getClienteByFecha(@PathParam("fecha") String fecha){
+        return Response.ok(clienteDAO.seleccionarByFecha(fecha)).build();
+    }
 
 
 

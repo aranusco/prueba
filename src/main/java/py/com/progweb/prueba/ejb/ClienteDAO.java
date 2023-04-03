@@ -1,11 +1,14 @@
 package py.com.progweb.prueba.ejb;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import py.com.progweb.prueba.model.Cliente;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,4 +51,19 @@ public class ClienteDAO {
             this.em.remove(c);
         }
     }
+
+    /**Seleccionar la lista de clientes que cumplen anhhos en el dia 'dd-MM'
+     * */
+    public List seleccionarByFecha(String ddmm) {
+        String day = ddmm.substring(0, 2);
+        String month = ddmm.substring(3, 5);
+        List<Cliente> users = em.createQuery(
+                        "SELECT c FROM Cliente c WHERE SUBSTRING(c.fechaNacimiento, 1, 2) = :day AND SUBSTRING(c.fechaNacimiento, 4, 2) = :month", Cliente.class)
+                .setParameter("month", month)
+                .setParameter("day", day)
+                .getResultList();
+        return users;
+    }
+
+
 }
