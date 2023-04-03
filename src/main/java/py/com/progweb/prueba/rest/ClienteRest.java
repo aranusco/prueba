@@ -24,7 +24,7 @@ public class ClienteRest {
     @GET
     @Path("/apellido/{apellido}")
     public Response getClientePorApellido(@PathParam("apellido") String apellido){
-        return Response.ok(clienteDAO.seleccionar(apellido)).build();
+        return Response.ok(clienteDAO.seleccionarApellido(apellido)).build();
     }
     @GET
     @Path("/cumple/{fecha}")

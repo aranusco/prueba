@@ -29,7 +29,10 @@ public class ClienteDAO {
         return this.em.createQuery("select c from Cliente c where nombre like :param")
                 .setParameter("param", "%"+nombre+"%").getResultList();
     }
-
+    public List seleccionarApellido(String apellido){
+        return this.em.createQuery("select c from Cliente c where apellido like :param")
+                .setParameter("param", "%"+apellido+"%").getResultList();
+    }
     public Cliente getById(Long id){
         return this.em.find(Cliente.class, id);
     }
