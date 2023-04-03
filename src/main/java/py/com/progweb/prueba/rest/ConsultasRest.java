@@ -32,7 +32,19 @@ public class ConsultasRest {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An error ocurred while listing point uses: " + e.getMessage()).build();
         }
     }
-
+    @GET
+    @Path("bolsa-puntos/rango")
+    public Response puntosPorRango(@QueryParam("rangoInferior") Integer rangoInferior, @QueryParam("rangoSuperior") Integer rangoSuperior) {
+        try {
+            List<BolsaPuntos> listaPuntos = consultasDao.listarPorRango(rangoInferior, rangoSuperior);
+            if (listaPuntos == null) {
+                return Response.status(Response.Status.NOT_FOUND).build();
+            }
+            return Response.ok(listaPuntos).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An error ocurred while listing point uses: " + e.getMessage()).build();
+        }
+    }
 
     @GET
     @Path("uso-puntos/fecha")

@@ -29,4 +29,10 @@ public class ConsultasDAO {
     }
 
 
+    public List<BolsaPuntos> listarPorRango(Integer rangoInferior, Integer rangoSuperior) {
+        return this.em.createQuery("select bp from BolsaPuntos bp " +
+                "where bp.puntajeAsignado >= :min and puntajeAsignado <= :max", BolsaPuntos.class)
+                .setParameter("min", rangoInferior).setParameter("max", rangoSuperior)
+                .getResultList();
+    }
 }
